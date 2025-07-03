@@ -2,55 +2,33 @@ package com.example.save_map;
 
 import android.os.Bundle;
 import androidx.activity.ComponentActivity;
-import androidx.activity.compose.setContent;
-import androidx.compose.foundation.layout.*;
-import androidx.compose.material3.*;
-import androidx.compose.runtime.Composable;
-import androidx.compose.ui.Modifier;
-import androidx.compose.ui.graphics.Color;
-import androidx.compose.ui.unit.dp;
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.view.Gravity;
+import android.graphics.Color;
 
-public class MainActivity extends ComponentActivity {
+public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContent(() -> MainScreen());
-    }
 
-    @Composable
-    void MainScreen() {
-        MaterialTheme(
-            colorScheme = lightColorScheme(
-                Color.parseColor("#8bc34a"), // Primary
-                Color.parseColor("#c5e1a5"), // PrimaryContainer
-                Color.parseColor("#b2ff59"), // Secondary
-                Color.parseColor("#f1f8e9"), // Background
-                Color.parseColor("#dcedc8")  // Surface
-            ),
-            content = () -> {
-                Scaffold(
-                    topBar = () -> TopAppBar(),
-                    content = innerPadding -> {
-                        Column(
-                            modifier = Modifier.padding(innerPadding).fillMaxSize()
-                        ) {
-                            // TODO: Add Card, List, FAB, etc. as per UI spec
-                            Text("BC Transit Navigator", style = MaterialTheme.typography().headlineMedium());
-                        }
-                    }
-                );
-            }
-        );
-    }
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setBackgroundColor(Color.parseColor("#f1f8e9"));
+        layout.setGravity(Gravity.CENTER);
 
-    @Composable
-    void TopAppBar() {
-        LargeTopAppBar(
-            title = () -> Text("BC Transit Navigator"),
-            colors = TopAppBarDefaults.largeTopAppBarColors(
-                containerColor = Color.parseColor("#8bc34a"),
-                titleContentColor = Color.White
-            )
-        );
+        TextView title = new TextView(this);
+        title.setText("BC Transit Navigator");
+        title.setTextSize(24);
+        title.setTextColor(Color.WHITE);
+        title.setBackgroundColor(Color.parseColor("#8bc34a"));
+        title.setPadding(32, 64, 32, 64);
+        title.setGravity(Gravity.CENTER);
+
+        layout.addView(title);
+
+        setContentView(layout);
     }
 }
