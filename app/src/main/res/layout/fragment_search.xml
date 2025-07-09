@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_theme_light_background">
+
+    <com.google.android.material.search.SearchBar
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="목적지 검색..."
+        app:strokeColor="@color/md_theme_light_primary"
+        app:hintTextColor="@color/md_theme_light_onPrimaryContainer"
+        app:iconifiedByDefault="false" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/filter_chip_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:singleSelection="false">
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_fastest"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:text="최단시간" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_least_transfer"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:text="최소환승" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_accessible"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:text="접근성" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/route_result_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/md_theme_light_surface" />
+
+</LinearLayout>
