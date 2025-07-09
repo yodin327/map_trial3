@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/route_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="@color/md_theme_light_surface"
+    app:strokeColor="@color/md_theme_light_outline"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 경로 제목 및 저장 버튼 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/route_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="메인 스트리트 → 브로드웨이"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/md_theme_light_onSurface" />
+
+            <ImageView
+                android:id="@+id/route_save_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_save"
+                android:tint="@color/md_theme_light_primary"
+                android:contentDescription="경로 저장"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="2dp" />
+
+        </LinearLayout>
+
+        <!-- 시간 및 거리 정보 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/route_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25분"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/md_theme_light_primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" • "
+                android:textSize="16sp"
+                android:textColor="@color/md_theme_light_onSurfaceVariant"
+                android:layout_marginHorizontal="4dp" />
+
+            <TextView
+                android:id="@+id/route_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3.2km"
+                android:textSize="16sp"
+                android:textColor="@color/md_theme_light_onSurface" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" • "
+                android:textSize="16sp"
+                android:textColor="@color/md_theme_light_onSurfaceVariant"
+                android:layout_marginHorizontal="4dp" />
+
+            <TextView
+                android:id="@+id/route_transfer_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1회 환승"
+                android:textSize="14sp"
+                android:textColor="@color/md_theme_light_secondary" />
+
+        </LinearLayout>
+
+        <!-- 교통수단 정보 -->
+        <TextView
+            android:id="@+id/route_transit_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도보 + 버스"
+            android:textSize="14sp"
+            android:textColor="@color/md_theme_light_onSurfaceVariant"
+            android:layout_marginTop="4dp" />
+
+        <!-- 시간 정보 -->
+        <TextView
+            android:id="@+id/route_time_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="14:30 → 14:55"
+            android:textSize="14sp"
+            android:textColor="@color/md_theme_light_onSurface"
+            android:layout_marginTop="4dp"
+            android:visibility="gone" />
+
+        <!-- 하단 정보 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:id="@+id/route_cost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="요금: $3.75"
+                android:textSize="14sp"
+                android:textColor="@color/md_theme_light_primary"
+                android:textStyle="bold" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/route_carbon_chip"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CO₂ 120g 절약"
+                android:textSize="10sp"
+                android:visibility="gone"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:id="@+id/route_accessible_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_dialog_info"
+                android:tint="@color/md_theme_light_primary"
+                android:contentDescription="휠체어 접근 가능"
+                android:layout_gravity="center_vertical" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

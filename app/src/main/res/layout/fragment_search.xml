@@ -6,40 +6,130 @@
     android:layout_height="match_parent"
     android:background="@color/md_theme_light_background">
 
-    <com.google.android.material.search.SearchBar
-        android:id="@+id/search_bar"
+    <!-- 검색 입력 섹션 -->
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="목적지 검색..."
-        app:strokeColor="@color/md_theme_light_primary"
-        app:hintTextColor="@color/md_theme_light_onPrimaryContainer"
-        app:iconifiedByDefault="false" />
+        android:layout_margin="16dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="@color/md_theme_light_surface">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 출발지 입력 -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="출발지"
+                app:startIconDrawable="@android:drawable/ic_menu_mylocation"
+                app:startIconTint="@color/md_theme_light_primary"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/search_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 출발지/목적지 교환 버튼 -->
+            <ImageView
+                android:id="@+id/swap_locations_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:src="@android:drawable/ic_menu_rotate"
+                app:tint="@color/md_theme_light_primary"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="출발지/목적지 교환"
+                android:layout_marginVertical="8dp" />
+
+            <!-- 목적지 입력 -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="목적지"
+                app:startIconDrawable="@android:drawable/ic_dialog_map"
+                app:startIconTint="@color/md_theme_light_secondary"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/destination_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- 필터 칩 그룹 -->
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/filter_chip_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        app:singleSelection="false">
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        app:singleSelection="true">
+        
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_fastest"
             style="@style/Widget.Material3.Chip.Filter"
-            android:text="최단시간" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최단시간"
+            android:textColor="@color/md_theme_light_onSurface"
+            app:chipBackgroundColor="@color/md_theme_light_primaryContainer" />
+            
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_least_transfer"
             style="@style/Widget.Material3.Chip.Filter"
-            android:text="최소환승" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최소환승"
+            android:textColor="@color/md_theme_light_onSurface" />
+            
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_accessible"
             style="@style/Widget.Material3.Chip.Filter"
-            android:text="접근성" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="접근성"
+            android:textColor="@color/md_theme_light_onSurface" />
+            
     </com.google.android.material.chip.ChipGroup>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/route_result_list"
+    <!-- 결과 영역 -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/md_theme_light_surface" />
+        android:layout_weight="1">
+
+        <!-- 장소 검색 결과 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/place_result_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/md_theme_light_background"
+            android:visibility="gone"
+            android:padding="8dp" />
+
+        <!-- 경로 검색 결과 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/route_result_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/md_theme_light_background"
+            android:padding="8dp" />
+
+    </FrameLayout>
 
 </LinearLayout>

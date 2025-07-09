@@ -188,21 +188,64 @@ public class HomeFragment extends Fragment {
         // 실제로는 Google Places API로 근처 대중교통 정류장 검색
         nearbyStations.clear();
         
-        // 샘플 데이터 (실제 구현 시 Places API 사용)
-        nearbyStations.add(new TransitStation("ST001", "메인 스트리트 정류장", 
-                "메인 스트리트 & 1번가", 
-                location.getLatitude() + 0.001, location.getLongitude() + 0.001,
-                new String[]{"99", "20", "25"}));
+        // BC 전체 지역 샘플 데이터 (실제 구현 시 Places API 사용)
+        // 현재 위치 기반으로 적절한 지역 정류장 표시
+        double lat = location.getLatitude();
+        double lng = location.getLongitude();
         
-        nearbyStations.add(new TransitStation("ST002", "브로드웨이 정류장", 
-                "브로드웨이 & 2번가", 
-                location.getLatitude() + 0.002, location.getLongitude() - 0.001,
-                new String[]{"9", "14", "16"}));
+        // 밴쿠버 지역 (위도 49.0-49.5, 경도 -123.5 ~ -122.5)
+        if (lat >= 49.0 && lat <= 49.5 && lng >= -123.5 && lng <= -122.5) {
+            nearbyStations.add(new TransitStation("ST001", "메인 스트리트 정류장", 
+                    "메인 스트리트 & 1번가, 밴쿠버", 
+                    lat + 0.001, lng + 0.001,
+                    new String[]{"99", "20", "25"}));
+            
+            nearbyStations.add(new TransitStation("ST002", "브로드웨이 정류장", 
+                    "브로드웨이 & 2번가, 밴쿠버", 
+                    lat + 0.002, lng - 0.001,
+                    new String[]{"9", "14", "16"}));
+        }
+        // 빅토리아 지역 (위도 48.0-48.7, 경도 -123.8 ~ -123.0)
+        else if (lat >= 48.0 && lat <= 48.7 && lng >= -123.8 && lng <= -123.0) {
+            nearbyStations.add(new TransitStation("VT001", "더글라스 스트리트 터미널", 
+                    "615 Douglas St, 빅토리아", 
+                    lat + 0.001, lng + 0.001,
+                    new String[]{"1", "4", "11"}));
+            
+            nearbyStations.add(new TransitStation("VT002", "업타운 쇼핑센터", 
+                    "3551 Blanshard St, 빅토리아", 
+                    lat + 0.002, lng - 0.001,
+                    new String[]{"2", "27", "39"}));
+        }
+        // 켈로나 지역 (위도 49.5-50.0, 경도 -119.8 ~ -119.0)
+        else if (lat >= 49.5 && lat <= 50.0 && lng >= -119.8 && lng <= -119.0) {
+            nearbyStations.add(new TransitStation("KL001", "하비 애비뉴 터미널", 
+                    "544 Harvey Ave, 켈로나", 
+                    lat + 0.001, lng + 0.001,
+                    new String[]{"8", "10", "15"}));
+        }
+        // 기본값 (BC 내 다른 지역)
+        else {
+            nearbyStations.add(new TransitStation("BC001", "지역 버스 터미널", 
+                    "현재 위치 근처", 
+                    lat + 0.001, lng + 0.001,
+                    new String[]{"1", "2", "3"}));
+        }
         
-        nearbyStations.add(new TransitStation("ST003", "그랜빌 정류장", 
-                "그랜빌 스트리트 & 3번가", 
-                location.getLatitude() - 0.001, location.getLongitude() + 0.002,
-                new String[]{"5", "6", "19"}));
+        // 추가 정류장 (지역별 특색 반영)
+        if (lat >= 49.0 && lat <= 49.5 && lng >= -123.5 && lng <= -122.5) {
+            // 밴쿠버 지역 추가 정류장
+            nearbyStations.add(new TransitStation("ST003", "그랜빌 정류장", 
+                    "그랜빌 스트리트 & 3번가, 밴쿠버", 
+                    location.getLatitude() - 0.001, location.getLongitude() + 0.002,
+                    new String[]{"5", "6", "19"}));
+        } else if (lat >= 48.0 && lat <= 48.7 && lng >= -123.8 && lng <= -123.0) {
+            // 빅토리아 지역 추가 정류장
+            nearbyStations.add(new TransitStation("VT003", "베이 센터", 
+                    "1150 Douglas St, 빅토리아", 
+                    location.getLatitude() - 0.001, location.getLongitude() + 0.002,
+                    new String[]{"6", "14", "21"}));
+        }
 
         // 거리 계산 및 업데이트
         for (TransitStation station : nearbyStations) {
@@ -220,16 +263,32 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadSampleData() {
-        // 즐겨찾기 샘플 데이터
+        // BC 전체 지역 즐겨찾기 샘플 데이터
         favoriteLocations.clear();
-        favoriteLocations.add(new FavoriteLocation("집", "메인 스트리트 123", 
+        
+        // 밴쿠버 지역
+        favoriteLocations.add(new FavoriteLocation("집", "메인 스트리트 123, 밴쿠버", 
                 49.2827, -123.1207, "home"));
-        favoriteLocations.add(new FavoriteLocation("직장", "다운타운 오피스", 
+        favoriteLocations.add(new FavoriteLocation("직장", "다운타운 오피스, 밴쿠버", 
                 49.2861, -123.1139, "work"));
-        favoriteLocations.add(new FavoriteLocation("학교", "UBC 캠퍼스", 
+        favoriteLocations.add(new FavoriteLocation("UBC 캠퍼스", "University of British Columbia", 
                 49.2606, -123.2460, "school"));
-        favoriteLocations.add(new FavoriteLocation("쇼핑몰", "메트로타운", 
+        favoriteLocations.add(new FavoriteLocation("메트로타운", "4700 Kingsway, 버나비", 
                 49.2264, -123.0093, "custom"));
+        
+        // 빅토리아 지역
+        favoriteLocations.add(new FavoriteLocation("빅토리아 다운타운", "615 Douglas St, 빅토리아", 
+                48.4284, -123.3656, "custom"));
+        favoriteLocations.add(new FavoriteLocation("UVic", "University of Victoria", 
+                48.4634, -123.3117, "school"));
+        
+        // 켈로나 지역
+        favoriteLocations.add(new FavoriteLocation("켈로나 공항", "5533 Airport Way, 켈로나", 
+                49.9561, -119.3777, "custom"));
+        
+        // 기타 BC 주요 도시
+        favoriteLocations.add(new FavoriteLocation("캠룹스 센터", "300 3rd Ave, 캠룹스", 
+                50.6745, -120.3273, "custom"));
 
         favoriteAdapter.updateFavorites(favoriteLocations);
     }
