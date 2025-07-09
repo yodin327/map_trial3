@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_theme_light_background">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/profile_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_theme_light_primary"
+            android:title="내 정보"
+            android:titleTextColor="@color/md_theme_light_onPrimary" />
+
+        <!-- 사용자 정보 카드 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/md_theme_light_surface">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@android:drawable/ic_menu_myplaces"
+                    android:contentDescription="프로필 이미지" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp">
+                    <TextView
+                        android:id="@+id/profile_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="사용자 이름"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:textColor="@color/md_theme_light_primary"
+                        android:contentDescription="사용자 이름" />
+                    <TextView
+                        android:id="@+id/profile_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="user@example.com"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="@color/md_theme_light_outline"
+                        android:layout_marginTop="4dp"
+                        android:contentDescription="이메일 주소" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 설정 옵션 리스트 -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="설정"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/md_theme_light_primary"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="설정 섹션" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_font_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/md_theme_light_surface"
+                android:clickable="true"
+                android:focusable="true">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="글자 크기"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="@color/md_theme_light_onPrimaryContainer"
+                        android:contentDescription="글자 크기 설정" />
+                    <TextView
+                        android:id="@+id/font_size_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="보통"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="@color/md_theme_light_outline"
+                        android:contentDescription="현재 글자 크기" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/md_theme_light_surface"
+                android:clickable="true"
+                android:focusable="true">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="테마"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="@color/md_theme_light_onPrimaryContainer"
+                        android:contentDescription="테마 설정" />
+                    <TextView
+                        android:id="@+id/theme_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="밝은 테마"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="@color/md_theme_light_outline"
+                        android:contentDescription="현재 테마" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_notifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/md_theme_light_surface"
+                android:clickable="true"
+                android:focusable="true">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="알림 설정"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="@color/md_theme_light_onPrimaryContainer"
+                        android:contentDescription="알림 설정" />
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/switch_notifications"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_voice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/md_theme_light_surface"
+                android:clickable="true"
+                android:focusable="true">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="음성 안내"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="@color/md_theme_light_onPrimaryContainer"
+                        android:contentDescription="음성 안내 설정" />
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/switch_voice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <!-- 앱 정보 -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="앱 정보"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/md_theme_light_primary"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="앱 정보 섹션" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/md_theme_light_surface">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="앱 버전"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="@color/md_theme_light_onPrimaryContainer"
+                        android:contentDescription="앱 버전 정보" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1.0.0"
+                        android:textSize="16sp"
+                        android:textColor="@color/md_theme_light_outline" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

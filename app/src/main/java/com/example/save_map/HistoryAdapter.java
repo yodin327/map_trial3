@@ -36,6 +36,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onItemClick(item);
         });
+        holder.itemView.setOnLongClickListener(v -> {
+            if (longClickListener != null) longClickListener.onItemLongClick(item, position);
+            return true;
+        });
     }
 
     @Override
@@ -54,6 +58,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     private OnItemClickListener listener;
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
+    }
+
+    public interface OnItemLongClickListener {
+        void onItemLongClick(HistoryItem item, int position);
+    }
+    private OnItemLongClickListener longClickListener;
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        this.longClickListener = listener;
     }
 
     public static class HistoryViewHolder extends RecyclerView.ViewHolder {
