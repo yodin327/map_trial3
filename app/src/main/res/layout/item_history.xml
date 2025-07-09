@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@color/md_theme_light_surface">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/history_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2025-07-08 14:30"
+            android:textSize="16sp"
+            android:textColor="@color/md_theme_light_primary" />
+        <TextView
+            android:id="@+id/history_route"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="출발지 → 도착지"
+            android:textSize="20sp"
+            android:textColor="@color/md_theme_light_onPrimaryContainer"
+            android:paddingTop="4dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/history_favorite"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@android:drawable/btn_star_big_on"
+        android:contentDescription="즐겨찾기"
+        android:layout_gravity="center_vertical"
+        android:visibility="visible"
+        android:clickable="true"
+        android:focusable="true" />
+
+</LinearLayout>
