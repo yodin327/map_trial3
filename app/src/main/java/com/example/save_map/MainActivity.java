@@ -18,23 +18,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
-                switch (item.getItemId()) {
-                    case R.id.nav_home:
-                        selectedFragment = new HomeFragment();
-                        break;
-                    case R.id.nav_maps:
-                        selectedFragment = new MapsFragment();
-                        break;
-                    case R.id.nav_search:
-                        selectedFragment = new SearchFragment();
-                        break;
-                    case R.id.nav_history:
-                        selectedFragment = new HistoryFragment();
-                        break;
-                    case R.id.nav_profile:
-                        selectedFragment = new ProfileFragment();
-                        break;
+                int itemId = item.getItemId();
+                
+                if (itemId == R.id.nav_home) {
+                    selectedFragment = new HomeFragment();
+                } else if (itemId == R.id.nav_maps) {
+                    selectedFragment = new MapsFragment();
+                } else if (itemId == R.id.nav_search) {
+                    selectedFragment = new SearchFragment();
+                } else if (itemId == R.id.nav_history) {
+                    selectedFragment = new HistoryFragment();
+                } else if (itemId == R.id.nav_profile) {
+                    selectedFragment = new ProfileFragment();
                 }
+                
                 if (selectedFragment != null) {
                     getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, selectedFragment)

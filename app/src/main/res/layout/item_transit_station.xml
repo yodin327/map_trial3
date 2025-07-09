@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/station_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="3dp"
+    app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="@color/md_theme_light_surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/station_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="브로드웨이 정류장"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/md_theme_light_onSurface" />
+
+                <TextView
+                    android:id="@+id/station_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="브로드웨이 &amp; 메인 스트리트"
+                    android:textSize="14sp"
+                    android:textColor="@color/md_theme_light_onSurfaceVariant"
+                    android:layout_marginTop="2dp" />
+
+                <TextView
+                    android:id="@+id/station_routes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="노선: 99, 20, 25"
+                    android:textSize="12sp"
+                    android:textColor="@color/md_theme_light_primary"
+                    android:layout_marginTop="4dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="end">
+
+                <TextView
+                    android:id="@+id/station_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="250m"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/md_theme_light_onSurface" />
+
+                <TextView
+                    android:id="@+id/station_estimated_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5분 후 도착"
+                    android:textSize="12sp"
+                    android:textColor="@color/md_theme_light_secondary"
+                    android:layout_marginTop="2dp" />
+
+                <ImageView
+                    android:id="@+id/station_accessible_icon"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@android:drawable/ic_dialog_info"
+                    android:tint="@color/md_theme_light_primary"
+                    android:layout_marginTop="4dp"
+                    android:contentDescription="휠체어 접근 가능"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

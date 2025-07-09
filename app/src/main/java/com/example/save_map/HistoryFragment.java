@@ -124,10 +124,13 @@ public class HistoryFragment extends Fragment {
         xAxis.setGranularity(1f);
         xAxis.setPosition(com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM);
         final String[] days = {"", "월", "화", "수", "목", "금", "토", "일"};
-        xAxis.setValueFormatter((value, axis) -> {
-            int idx = (int) value;
-            if (idx >= 1 && idx <= 7) return days[idx];
-            return "";
+        xAxis.setValueFormatter(new com.github.mikephil.charting.formatter.ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                int idx = (int) value;
+                if (idx >= 1 && idx <= 7) return days[idx];
+                return "";
+            }
         });
         xAxis.setTextSize(14f);
         xAxis.setTextColor(getResources().getColor(R.color.md_theme_light_primary));

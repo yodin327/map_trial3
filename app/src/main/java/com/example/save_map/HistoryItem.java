@@ -1,6 +1,7 @@
 package com.example.save_map;
 
 public class HistoryItem {
+    public int id;                // 고유 ID 추가
     public String date;           // 이용 날짜 (예: 2025-07-08)
     public String time;           // 이용 시간 (예: 14:30)
     public String startLocation;  // 출발지명 또는 정류장명
@@ -28,4 +29,9 @@ public class HistoryItem {
     public String getFrom() { return startLocation; }
     public String getTo() { return endLocation; }
     public int getTripCount() { return tripCount; }
+    
+    // getRoute() 메서드 추가
+    public String getRoute() {
+        return startLocation + " → " + endLocation;
+    }
 }
