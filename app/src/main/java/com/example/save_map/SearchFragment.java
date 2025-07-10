@@ -348,7 +348,7 @@ public class SearchFragment extends Fragment {
         String travelMode = getTravelModeFromFilter();
         
         directionsService.searchMultipleRouteOptions(selectedOrigin, selectedDestination, 
-            new GoogleDirectionsService.RouteSearchCallback() {
+            new RouteSearchCallback() {
                 @Override
                 public void onRoutesFound(List<RouteSearchResult> routes) {
                     if (getActivity() != null) {
@@ -371,8 +371,6 @@ public class SearchFragment extends Fragment {
                     if (getActivity() != null) {
                         getActivity().runOnUiThread(() -> {
                             Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
-                            // 오류 시 샘플 데이터로 폴백
-                            generateSampleRoutes();
                         });
                     }
                 }

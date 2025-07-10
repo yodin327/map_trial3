@@ -31,11 +31,6 @@ public class GoogleDirectionsService {
     private final ExecutorService executorService;
     private final String apiKey;
 
-    public interface RouteSearchCallback {
-        void onRoutesFound(java.util.List<RouteSearchResult> routes);
-        void onRouteSearchError(String error);
-    }
-
     public GoogleDirectionsService(Context context) {
         this.context = context;
         this.httpClient = new OkHttpClient();
@@ -87,12 +82,84 @@ public class GoogleDirectionsService {
     }
 
     /**
-     * 여러 교통수단 옵션으로 경로 검색
+     * 여러 교통수단 옵션으로 경로 검색 (transit, walking, driving)
      */
     public void searchMultipleRouteOptions(PlaceSearchResult origin, PlaceSearchResult destination,
                                          RouteSearchCallback callback) {
-        // 단순화된 접근: 하나씩 검색하고 결과 합치기
-        searchTransitRoutes(origin, destination, "transit", callback);
+        String[] modes = {"transit", "walking", "driving"};
+        Aggregator aggregator = new Aggregator(modes.length, callback);
+        for (String mode : modes) {
+            searchRoutesByMode(origin, destination, mode, aggregator);
+        }
+    }
+
+    // 모드별 경로 검색 (공통화)
+    private void searchRoutesByMode(PlaceSearchResult origin, PlaceSearchResult destination, String mode, Aggregator aggregator) {
+        executorService.execute(() -> {
+            try {
+                String originStr = origin.getLatitude() + "," + origin.getLongitude();
+                String destinationStr = destination.getLatitude() + "," + destination.getLongitude();
+                String url = buildDirectionsUrl(originStr, destinationStr, mode);
+                Request request = new Request.Builder().url(url).build();
+                httpClient.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        aggregator.onError("경로 검색 중 네트워크 오류(" + mode + ")");
+                    }
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                            aggregator.onError("경로 검색 실패(" + mode + "): " + response.code());
+                            return;
+                        }
+                        String responseBody = response.body().string();
+                        parseDirectionsResponse(responseBody, origin, destination, aggregator, mode);
+                    }
+                });
+            } catch (Exception e) {
+                aggregator.onError("경로 검색 요청 생성 중 오류(" + mode + ")");
+            }
+        });
+    }
+
+    // Aggregator: 모든 모드의 결과를 모아 callback을 한 번만 호출
+    private static class Aggregator implements RouteSearchCallback {
+        private final int total;
+        private final RouteSearchCallback callback;
+        private final List<RouteSearchResult> allResults = new ArrayList<>();
+        private int finished = 0;
+        private boolean called = false;
+        private String firstError = null;
+        public Aggregator(int total, RouteSearchCallback callback) {
+            this.total = total;
+            this.callback = callback;
+        }
+        @Override
+        public synchronized void onRoutesFound(List<RouteSearchResult> routes) {
+            if (called) return;
+            if (routes != null) allResults.addAll(routes);
+            finished++;
+            checkDone();
+        }
+        @Override
+        public synchronized void onRouteSearchError(String error) {
+            if (called) return;
+            if (firstError == null) firstError = error;
+            finished++;
+            checkDone();
+        }
+        private void checkDone() {
+            if (finished >= total && !called) {
+                called = true;
+                if (!allResults.isEmpty()) {
+                    callback.onRoutesFound(allResults);
+                } else {
+                    callback.onRouteSearchError(firstError != null ? firstError : "경로를 찾을 수 없습니다");
+                }
+            }
+        }
+        // 외부에서 에러 처리용
+        public void onError(String error) { onRouteSearchError(error); }
     }
 
     private String buildDirectionsUrl(String origin, String destination, String mode) {
@@ -142,6 +209,12 @@ public class GoogleDirectionsService {
             Log.e(TAG, "Error parsing directions response", e);
             callback.onRouteSearchError("응답 파싱 중 오류가 발생했습니다");
         }
+    }
+
+    private void parseDirectionsResponse(String responseBody, PlaceSearchResult origin, 
+                                       PlaceSearchResult destination, RouteSearchCallback callback, String mode) {
+        // 기존과 동일하게 파싱 후 callback 호출
+        parseDirectionsResponse(responseBody, origin, destination, callback);
     }
 
     private RouteSearchResult parseRoute(JSONObject route, PlaceSearchResult origin, 
