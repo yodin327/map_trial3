@@ -24,7 +24,7 @@
             android:layout_height="32dp"
             android:layout_marginBottom="8dp"
             android:src="@android:drawable/ic_dialog_map"
-            android:tint="@color/md_theme_light_primary"
+            app:tint="@color/md_theme_light_primary"
             android:contentDescription="즐겨찾기 아이콘" />
 
         <TextView

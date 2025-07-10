@@ -32,7 +32,7 @@ public class GoogleDirectionsService {
     private final String apiKey;
 
     public interface RouteSearchCallback {
-        void onRoutesFound(List<RouteSearchResult> routes);
+        void onRoutesFound(java.util.List<RouteSearchResult> routes);
         void onRouteSearchError(String error);
     }
 
@@ -91,44 +91,8 @@ public class GoogleDirectionsService {
      */
     public void searchMultipleRouteOptions(PlaceSearchResult origin, PlaceSearchResult destination,
                                          RouteSearchCallback callback) {
-        List<RouteSearchResult> allRoutes = new ArrayList<>();
-        final int[] completedRequests = {0};
-        final int totalRequests = 3; // transit, walking, driving
-
-        RouteSearchCallback consolidatedCallback = new RouteSearchCallback() {
-            @Override
-            public void onRoutesFound(List<RouteSearchResult> routes) {
-                synchronized (allRoutes) {
-                    allRoutes.addAll(routes);
-                    completedRequests[0]++;
-                    
-                    if (completedRequests[0] >= totalRequests) {
-                        // 모든 요청 완료 - 결과를 시간순으로 정렬
-                        allRoutes.sort((r1, r2) -> r1.getDurationMinutes() - r2.getDurationMinutes());
-                        callback.onRoutesFound(allRoutes);
-                    }
-                }
-            }
-
-            @Override
-            public void onRouteSearchError(String error) {
-                synchronized (allRoutes) {
-                    completedRequests[0]++;
-                    if (completedRequests[0] >= totalRequests) {
-                        callback.onRoutesFound(allRoutes); // 부분 결과라도 반환
-                    }
-                }
-            }
-        };
-
-        // 대중교통
-        searchTransitRoutes(origin, destination, "transit", consolidatedCallback);
-        
-        // 도보
-        searchTransitRoutes(origin, destination, "walking", consolidatedCallback);
-        
-        // 자동차 (참고용)
-        searchTransitRoutes(origin, destination, "driving", consolidatedCallback);
+        // 단순화된 접근: 하나씩 검색하고 결과 합치기
+        searchTransitRoutes(origin, destination, "transit", callback);
     }
 
     private String buildDirectionsUrl(String origin, String destination, String mode) {

@@ -38,7 +38,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@android:drawable/ic_menu_save"
-                android:tint="@color/md_theme_light_primary"
+                app:tint="@color/md_theme_light_primary"
                 android:contentDescription="경로 저장"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="2dp" />
@@ -148,7 +148,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@android:drawable/ic_dialog_info"
-                android:tint="@color/md_theme_light_primary"
+                app:tint="@color/md_theme_light_primary"
                 android:contentDescription="휠체어 접근 가능"
                 android:layout_gravity="center_vertical" />
 
